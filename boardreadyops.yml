@@ -1,0 +1,29 @@
+version: 1
+mode: warn
+
+projects:
+  - path: hardware/sensorbuddy
+  - path: hardware/plugcontrol
+
+rules:
+  manufacturing.outputs-present:
+    enabled: true
+    severity: medium
+    required: [gerber, drill, position]
+  manufacturing.jobset-outputs:
+    enabled: true
+    severity: medium
+  bom.missing-mpn:
+    enabled: true
+    severity: medium
+  bom.variant-consistency:
+    enabled: true
+    severity: low
+
+fail-on: critical
+
+report:
+  sarif: build/boardreadyops.sarif.json
+  json: build/boardreadyops.findings.json
+  markdown: build/boardreadyops.report.md
+  junit: build/boardreadyops.junit.xml
