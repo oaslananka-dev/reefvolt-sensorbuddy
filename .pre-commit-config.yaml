@@ -1,0 +1,3 @@
+# Minimal configuration to keep pre-commit.ci enabled for this fork.
+# Add project-specific hooks once the hardware/firmware lint policy is defined.
+repos: []
