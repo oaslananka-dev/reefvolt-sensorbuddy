@@ -21,18 +21,17 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Install KiCad 10
+        run: |
+          sudo add-apt-repository --yes ppa:kicad/kicad-10.0-releases
+          sudo apt-get update -qq
+          sudo apt-get install --yes kicad
+          kicad-cli version
+
       - name: Run BoardReadyOps
         uses: oaslananka/boardreadyops@84d77e288cf43fa1c5ea680d0d3241b38afb1110
         with:
           config: boardreadyops.yml
           mode: warn
           fail-on: critical
-
-      - name: Upload BoardReadyOps reports
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
-        if: always()
-        with:
-          name: boardreadyops-report
-          path: |
-            build/boardreadyops.*
-          if-no-files-found: warn
+          require-kicad: true
